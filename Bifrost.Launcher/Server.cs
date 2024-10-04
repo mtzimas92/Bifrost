@@ -2,8 +2,8 @@
 {
     public class Server
     {
-        public string Name { get; set; } = "Local Server";
-        public string SiteConfigUrl { get; set; } = "localhost/SiteConfig.xml";
+        public string Name { get; set; } = "Project TAHITI";
+        public string SiteConfigUrl { get; set; } = "mhtahiti.com/SiteConfig.xml";
 
         public Server(string name, string siteConfigUrl)
         {
