@@ -10,6 +10,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <AssemblyVersion>0.2.0.0</AssemblyVersion>
+    <AssemblyName>TAHITI-Bifrost</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
