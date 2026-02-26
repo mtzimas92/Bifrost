@@ -6,7 +6,7 @@ namespace Bifrost.Core.Models
     {
         public string ThemeOverride { get; set; } = string.Empty;
         public NewsFeedSourceCategories NewsCategoryFilter { get; set; } = NewsFeedSourceCategories.All;
-        public string DefaultNewsFeedUrl { get; set; } = "https://crypto137.github.io/MHServerEmu/feed.xml";
+        public string DefaultNewsFeedUrl { get; set; } = "https://mhtahiti.com/announcements/rss";
 
         public GuiConfig Clone()
         {

@@ -11,6 +11,16 @@
         Closed="Window_Closed">
 
     <Window.Styles>
+                <Style Selector="ComboBox">
+                    <Setter Property="Background" Value="#3399ff" />
+                    <Setter Property="BorderBrush" Value="#005580" />
+                    <Setter Property="BorderThickness" Value="2" />
+                    <Setter Property="CornerRadius" Value="10" />
+                    <Setter Property="Padding" Value="8 4" />
+                    <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
+                    <Setter Property="FontSize" Value="18" />
+                    <Setter Property="Foreground" Value="#FFFFFF" />
+                </Style>
         <Style Selector="TextBlock.server-status">
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -19,29 +29,28 @@
         </Style>
 
         <Style Selector="TextBlock.news-header">
-            <Setter Property="Margin" Value="10 10 40 10" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0 0 0 10" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
-            <Setter Property="FontSize" Value="30" />
-            <Setter Property="Foreground" Value="#ffaa00" />
+            <Setter Property="FontSize" Value="34" />
+            <Setter Property="Foreground" Value="#0088cc" />
         </Style>
 
         <Style Selector="HyperlinkButton.news-item">
             <Setter Property="Width" Value="270" />
-            <Setter Property="Height" Value="90" />
+            <Setter Property="MaxHeight" Value="120" />
             <Setter Property="Background" Value="#80000000" />
             <Setter Property="Padding" Value="0" />
             <Setter Property="BorderThickness" Value="4 0 0 0" />
 
             <Style Selector="^ TextBlock">
                 <Setter Property="Margin" Value="10" />
-                <!-- <Setter Property="TextAlignment" Value="Right" /> doesn't work correctly with wrapping -->
                 <Setter Property="VerticalAlignment" Value="Bottom" />
                 <Setter Property="TextWrapping" Value="Wrap" />
                 <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
-                <Setter Property="FontSize" Value="18" />
-                <Setter Property="Foreground" Value="#00aaff" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Foreground" Value="#FFFFFF" />
                 <Setter Property="TextDecorations" Value="{x:Null}" />
             </Style>
         </Style>
@@ -66,6 +75,7 @@
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="FontFamily" Value="{DynamicResource ResourceKey=BebasNeue}" />
             <Setter Property="FontSize" Value="22" />
+            <Setter Property="CornerRadius" Value="12" />
         </Style>
 
         <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
@@ -96,6 +106,15 @@
         <Grid.Background>
             <ImageBrush Source="/Assets/Images/background.png" />
         </Grid.Background>
+
+        <!-- Add a new row for the logo -->
+        <!-- RowDefinitions: 80 (logo), 30 (server status), * (news), 95 (bottom controls) -->
+        <Grid.RowDefinitions>30,*,95</Grid.RowDefinitions>
+
+        <!-- Overlay logo at the top left without affecting layout -->
+        <Canvas IsHitTestVisible="False">
+            <Image Source="/Assets/Images/tahiti-logo.png" Height="80" Canvas.Left="16" Canvas.Top="12"/>
+        </Canvas>
 
         <!-- Server Status -->
         <Grid Grid.Row="0" ColumnDefinitions="* 270 30" IsVisible="False">
@@ -130,7 +149,7 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        
+
         <!-- Bottom Controls -->
         <Grid Grid.Row="2" Background="#80090909">
             <Grid ColumnDefinitions="180 * 180 80 180" RowDefinitions="* *" Margin="10" ColumnSpacing="10" x:Name="BottomControlsGrid">

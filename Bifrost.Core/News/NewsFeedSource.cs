@@ -49,14 +49,27 @@ namespace Bifrost.Core.News
                 reader.Close();
 
                 foreach (SyndicationItem feedItem in feed.Items)
-                {
-                    string title = feedItem.Title.Text.Trim();
-                    string url = feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.AbsoluteUri : string.Empty;
-                    DateTime timestamp = feedItem.LastUpdatedTime.LocalDateTime;
+                        {
+                            string description = feedItem.Summary?.Text?.Trim() ?? string.Empty;
 
-                    NewsFeedItem item = new(this, title, url, timestamp);
-                    _items.Add(item);
-                }
+                            // Remove '**NOTICE:**' and all '§MENTION§...§END§' blocks
+                            description = description.Replace("**NOTICE:**", string.Empty);
+                            while (true)
+                            {
+                                int start = description.IndexOf("§MENTION§");
+                                if (start == -1) break;
+                                int end = description.IndexOf("§END§", start);
+                                if (end == -1) break;
+                                description = description.Remove(start, end - start + 6);
+                            }
+
+                            string url = feedItem.Links.Count > 0 ? feedItem.Links[0].Uri.AbsoluteUri : string.Empty;
+                            DateTime timestamp = feedItem.PublishDate != default ? feedItem.PublishDate.LocalDateTime : feedItem.LastUpdatedTime.LocalDateTime;
+
+                            // Only show description in the UI (title replaced by cleaned description)
+                            NewsFeedItem item = new(this, description, url, timestamp);
+                            _items.Add(item);
+                        }
 
                 IsLoaded = true;
             }
